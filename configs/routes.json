@@ -1,0 +1,24 @@
+{
+    
+    "url":{
+        "ip":"localhost",
+        "port":"3000"
+    },
+    "maps":[
+        {
+            "name":"R_v2_mg.TIF",
+            "title":"Mapa de erosividad",
+            "units":"MJ*mm*(ha*h*año)^(-1)",
+            "scale":"./Icons/erosividadEscala.png",
+            "color":"Accent"
+        },
+        {
+            "name":"K_v2_mg.TIF",
+            "title":"Mapa de erodabilidad",
+            "units":"t*ha*h*(h*MJ*mm)^(-1)",
+            "scale":"./Icons/erodabilidadEscala.png",
+            "color":"Viridis"
+        }
+
+    ]
+}

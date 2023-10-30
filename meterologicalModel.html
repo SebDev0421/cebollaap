@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Juan S Guerrero">
+    <meta name="generator" content="Agrosavia 0.1.0">
+    <title>Bulbo ocañero</title>
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
+    <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.js"></script>
+
+    <link rel="stylesheet" href="metereologicalModel.css">
+
+    
+
+    <!-- Bootstrap core CSS -->
+<link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="home.css" rel="stylesheet">
+  </head>
+  <body>
+    
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">CebollApp</a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</header>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-danger sidebar collapse">
+      <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active text-white" aria-current="page" href="/stations">
+              <span data-feather="home"></span>
+              Seguimiento meteorológico
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/maps">
+              <span data-feather="file"></span>
+              Indicadores de calidad de suelo, agua y oferta ambiental 
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/metereologicalModel">
+              <span data-feather="shopping-cart"></span>
+              Seguimiento a las condiciones de cultivo de cebolla ocañera
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      
+      <div class="content-app">
+  
+      <div class = "main-view">
+
+        <!-- <div id="informationBanner">
+          <div id="banner">
+            <p>
+              La ventana para el Seguimiento a las condiciones de cultivo de cebolla ocañera, se basa en un modelo de balance hídrico agrícola desarrollado por FAO en los documentos: “FAO N° 33-Efectos del agua sobre el rendimiento de los cultivos” y “FAO N° 56-Evapotranspiración del cultivo: Guías para la determinación de los requerimientos de agua de los cultivos”.  Este módulo trabaja a partir de las series climáticas de la Estación Meteorológica Automática (EMA) 01.SGR-OCAÑA.  
+            </p>
+            <div id="button-next">
+              <img src="./Icons/close.png" width="20px" height="20px"/>
+            </div>
+          </div>
+        </div> -->
+
+        <!-- <div id="informationBanner">
+          <div class="ring">Loading
+            <span></span>
+          </div>
+        </div> -->
+
+
+        
+
+        <!-- <div id="informationBanner-warning">
+          <div id="banner">
+            <img src="./Icons/plant.png" width="150px" height="150px"/>
+            <p>Requiere riego</p>
+            <div id="button-next">
+              <img src="./Icons/close.png" width="20px" height="20px"/>
+            </div>
+          </div>
+        </div> -->
+
+
+        <!-- <div id="informationBanner-warning">
+          <div id="banner">
+            <img src="./Icons/no-water.png" width="150px" height="150px"/>
+            <p>Requiere riego inmediato</p>
+            <div id="button-next">
+              <img src="./Icons/close.png" width="20px" height="20px"/>
+            </div>
+          </div>
+        </div>  -->
+
+        <!-- add code here down -->
+        <div id="container-app">
+
+          <div>
+            <h1>
+              Modelo de balance hidrico
+            </h1>
+          </div>
+
+          <div id="container-graphic">
+            <div id="panel-selector">
+              <div id="control-buttons">
+                <h4>Datos de entrada</h4>
+                <div id="date-selector">
+                  Lugar de siembra:
+                  
+                  <select name="stations" id="stations-select">
+                    <option value="">
+                      --Porfavor selecciona una estación--
+                    </option>
+                    <!-- fill from data base -->
+
+                  </select>
+                </div>
+                <div id="date-selector">
+                  Fecha de siembra:
+                  <input type="date"  id="dateInit">  <!-- fecha de inicio 90 dias antes de la actual -->
+                </div>
+                <div id="container-data">
+                  <div id="date-selector">
+                    Conoce las caracteristicas del suelo:
+                    <input type="checkbox" id="know-data">
+                  </div>
+                  
+                  <div id="data-fill">
+                    <div id="date-selector">
+                      Capacidad de campo:
+                      <input type="number" value="77.7" max="100.0" min="0.0" id="CapacidadCampo" step="0.1">
+                    </div>
+      
+                    <div id="date-selector">
+                      Punto de marchitez permanente:
+                      <input type="number" value="54.95" max="100.0" min="0.0" id="puntoMarchitez" step="0.1"> 
+                    </div>
+                  </div>
+                </div>
+
+                <div id="container-data">
+                  <div id="date-selector">
+                    Fecha de el(los) riego(s):
+                    <select name="riego" id="riego-select">
+                      <option value="1">Riego por defecto</option>
+                      <option value="2">Sin riego</option>
+                      <option value="3">Indicado en el calendario</option>
+                    </select>
+                  </div>
+                  
+                  <div id="data-fill-date">
+                    <div id="date-selector">
+                      Fechas de ultimo riego:
+                      <input type="date" id="dateEnd">
+                      <div id="button-add">
+                        <img src="./Icons/plus.png">
+                      </div>
+      
+                    </div>
+                  </div>
+                </div>
+                
+
+                <div id="dates-selected">
+                  
+                </div>
+
+
+
+                <div id="button-deploy">
+                  Consultar
+                </div>
+              </div>
+              <div id="alert-front">
+                <h4>Estado actual</h4>
+                <img src="./Icons/close.png" width="20px" height="20px"/>
+                <p id="dif-irrigation"></p>
+                <img >
+              </div>
+            </div>
+            <div id="graph-model">
+              <h2>Resultado</h2>
+              <canvas id="myChart" style="width:100vw;position: relative;"></canvas>
+              <!-- make table here -->
+              <h2>Tabla de datos</h2>
+              <diV id="table-model">
+                
+                <table id="data-table">
+                  <thead>
+                    <tr>
+                      <th>fecha</th>
+                      <th>Prec</th>
+                      <th>ETo</th>
+                      <th>Dr</th>
+                      <th>ETc</th>
+                      <th>Perc</th>
+                      <th>AFA</th>
+                      <th>ADT</th>
+                      <th>Lamina</th>
+                      <th>P</th>
+                      <th>Ks</th>
+                      <th>Kc</th>
+                      <th>Ks standar</th>
+                      <th>ETC_aj</th>
+                    </tr>
+                  </thead>
+                  <tbody id="bodyData"></tbody>
+                </table>
+              </diV>
+            </div>
+          </div>
+
+          
+
+
+          <script src="metereologicalModel.js"></script>
+        </div>
+      </div>
+  
+    </main>
+  </div>
+</div>
+
+
+      <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
+      
+</html>

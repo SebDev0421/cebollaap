@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Juan S Guerrero">
+    <meta name="generator" content="Agrosavia 0.1.0">
+    <title>Bulbo ocañero</title>
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
+    <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="mapservice.css">
+
+    
+
+    <!-- Bootstrap core CSS -->
+<link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="home.css" rel="stylesheet">
+  </head>
+  <body>
+    
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">CebollApp</a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</header>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-danger sidebar collapse">
+      <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active text-white" aria-current="page" href="/stations">
+              <span data-feather="home"></span>
+              Seguimiento meteorológico
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/maps">
+              <span data-feather="file"></span>
+              Indicadores de calidad de suelo, agua y oferta ambiental
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/metereologicalModel">
+              <span data-feather="shopping-cart"></span>
+              Seguimiento a las condiciones de cultivo de cebolla ocañera
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      
+      <div class="content-app">
+  
+      <div class = "main-view">
+
+        <div id="informationBanner">
+          <div id="banner">
+            <p>
+              En esta ventana podemos encontrar los Indicadores de calidad de suelo (Degradación de suelo y erosión), agua (Huella hídrica) y oferta ambiental (Tiempo Térmico), dispuestos bajo un visor de mapas donde se puede consultar de forma espacial los resultados de los indicadores.  
+            </p>
+            <div id="button-next">
+              <p>Continuar</p>
+            </div>
+          </div>
+          
+        </div>
+
+
+
+
+        <div id = "latlngShow">
+          <p id="latId"></p>
+        </div>
+
+
+        <div id = "layersControlContent">
+
+
+          <div id ="ContentLayer" class="hidric">
+            <p>Huella Hídrica</p>
+          </div>
+
+          <div id ="ContentLayer">
+            <div id="titleContent">
+              <p>Tiempo Térmico</p>
+            </div>
+            
+            <div id="dropDown">
+              <div id = "layerControl">
+                <label>Abril 1</label>
+                <div id="content-controls">
+                  <input id="buttonLayerAbril1" type="checkbox">
+                  <input id="sliderLayerAbril1" type="range" min="0" max="100" step="1" value="100">
+                </div>
+              </div>
+  
+              <div id = "layerControl">
+                <label>Abril 16</label>
+                <div id="content-controls">
+                  <input id="buttonLayerAbril16" type="checkbox">
+                  <input id="sliderLayerAbril16" type="range" min="0" max="100" step="1" value="100">
+                </div>
+              </div>
+  
+              <div id = "layerControl">
+                <label>Mayo 1</label>
+                <div id="content-controls">
+                  <input id="buttonLayerMayo1" type="checkbox">
+                  <input id="sliderLayerMayo1" type="range" min="0" max="100" step="1" value="100">
+                </div>
+              </div>
+  
+              <div id = "layerControl">
+                <label>Mayo 15</label>
+                <div id="content-controls">
+                  <input id="buttonLayerMayo15" type="checkbox">
+                  <input id="sliderLayerMayo15" type="range" min="0" max="100" step="1" value="100">
+                </div>
+              </div>
+  
+              <div id = "layerControl">
+                <label>Octubre 1</label>
+                <div id="content-controls">
+                  <input id="buttonLayerOctubre1" type="checkbox">
+                  <input id="sliderLayerOctubre1" type="range" min="0" max="100" step="1" value="100">
+                </div>
+              </div>
+  
+              <div id = "layerControl">
+                <label>Octubre 15</label>
+                <div id="content-controls">
+                  <input id="buttonLayerOctubre15" type="checkbox">
+                  <input id="sliderLayerOctubre15" type="range" min="0" max="100" step="1" value="100">
+                </div>
+              </div>
+  
+              <div id = "layerControl">
+                <label>Noviembre 1</label>
+                <div id="content-controls">
+                  <input id="buttonLayerNoviembre1" type="checkbox">
+                  <input id="sliderLayerNoviembre1" type="range" min="0" max="100" step="1" value="100">
+                </div>
+              </div>
+  
+              <div id = "layerControl">
+                <label>Noviembre 15</label>
+                <div id="content-controls">
+                  <input id="buttonLayerNoviembre15" type="checkbox">
+                  <input id="sliderLayerNoviembre15" type="range" min="0" max="100" step="1" value="100">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div id ="ContentLayer">
+            <p>Erosión</p>
+            <div id="dropDown">
+              <div id = "layerControl">
+                <label>Erosividad (R)</label>
+                <div id="content-controls">
+                  <input id="buttonLayerErosividad" type="checkbox">
+                  <input id="sliderLayerErosividad" type="range" min="0" max="100" step="1" value="100">
+                </div>
+              </div>
+  
+              <div id = "layerControl">
+                <label>Erodabilidad (K)</label>
+                <div id="content-controls">
+                  <input id="buttonLayerErodabilidad" type="checkbox">
+                  <input id="sliderLayerErodabilidad" type="range" min="0" max="100" step="1" value="100">
+                </div>
+              </div>
+  
+              <div id = "layerControl">
+                <label>Factor de Cobertura (C)</label>
+                <div id="content-controls">
+                  <input id="buttonLayerC" type="checkbox">
+                  <input id="sliderLayerC" type="range" min="0" max="100" step="1" value="100">
+                </div>
+              </div>
+  
+              <div id = "layerControl">
+                <label>Factor longitud e inclinación de la pendiente (LS)</label>
+                <div id="content-controls">
+                  <input id="buttonLayerLS" type="checkbox">
+                  <input id="sliderLayerLS" type="range" min="0" max="100" step="1" value="100">
+                </div>
+              </div>
+  
+              <div id = "layerControl">
+                <label>Tasa de erosión hídrica (E)</label>
+                <div id="content-controls">
+                  <input id="buttonLayerE" type="checkbox">
+                  <input id="sliderLayerE" type="range" min="0" max="100" step="1" value="100">
+                </div>
+              </div>
+            </div>
+            </div>
+            
+        </div>
+
+        <div class = "contentInformationLayer">
+          <div id ="infoContent">
+            <h3>Leyenda</h3>
+            <img
+             id="legend-layer"
+             width="290px"
+             height="320px"
+            />
+          </div>
+  
+        </div>
+
+        <div id ="legendContent">
+          <h3>Informacion</h3>
+          <label id="Information-Layer">
+            En la ventana de Indicadores de calidad de suelo, agua y oferta ambiental, se encuentran los Indicadores de calidad de suelo y erosión, de agua con la huella hídrica y de oferta ambiental con la determinación de tiempo térmico, dispuestos en un visor de mapas donde se puede consultar de forma espacial los resultados de los indicadores.   
+          </label>
+        </div>
+        
+
+        <div id="mapBox"></div>
+      </div>
+      </div>
+      <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+      <script src="https://unpkg.com/georaster-layer-for-leaflet/dist/georaster-layer-for-leaflet.min.js"></script>
+      <script src="https://unpkg.com/geoblaze"></script>
+      <script src="mapService.js"></script>
+  
+    </main>
+  </div>
+</div>
+
+
+      <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+</html>
